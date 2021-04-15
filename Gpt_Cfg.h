@@ -20,12 +20,28 @@
  *********************************************************************************************************************/
 
 
+/****************************************YOUSSEF*******************************************/
 
-/**********************************************************************************************************************
- *  GLOBAL DATA
- *********************************************************************************************************************/
+#define GptEnableDisableNotificationApi   On
 
 
+#if GptEnableDisableNotificationApi == On
+
+#define GPT_0_OVERFLOW_IR  ENABLED
+#define GPT_0_OUTPUT_COMPARE_IR DISABLED
+
+#define GPT_1_OVERFLOW_IR  ENABLED
+#define GPT_1_OUTPUT_COMPAREA_IR DISABLED
+#define GPT_1_OUTPUT_COMPAREB_IR DISABLED
+#define GPT_1_INPUT_CAPTURE_IR DISABLED
+
+
+#define GPT_2_OVERFLOW_IR  ENABLED
+#define GPT_2_OUTPUT_COMPARE_IR DISABLED
+
+#endif
+
+/******************************************************************************************/
 
 
 
