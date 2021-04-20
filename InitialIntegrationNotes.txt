@@ -1,0 +1,33 @@
+To be done:
+------------
+Gpt_EnableNotification should set parameter called notification_enabled ( per channel - used in  Gpt_SetMode)
+create driver configuration
+GptDevErrorDetect
+GptPredefTimer100us32bitEnable
+GptPredefTimer1usEnablingGrade
+GptReportWakeupSource
+create array for channel configuration " GptChannelConfigSet "
+GptEnableWakeup
+GptNotification
+create local array of channel
+notification enabled
+wakeup enable
+state
+mode is global (not in container configuration)
+GptPredefTimer100us32bitEnable -->added to config container
+
+
+Team notes:
+------------
+rok --> #defines in gpt.c are target specific --> put in porting file -- vn
+benwa
+Gpt_ChannelType --> somehow has to be related to porting file
+Gpt_ValueType --> why uint32 should be uint16 as timer1
+joe
+tenuGPT_err --> functions return void has to be void , det error calls det module
+tenu --> not standard
+violation to return ok (std ok and not ok in std types )
+on off also in std types
+gpt channel for channels not times itself
+tenuTimerState -- not standard , if use it in module only , make it in .c and create static from it
+gpt works only for overflow mode , other mode not included

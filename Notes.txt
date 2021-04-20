@@ -1,2 +1,12 @@
-1-
-EcuM_WakeupSourceType -- has dummy
+Questions:
+----------
+predef timers should have state running ,so be checking only on state running, we stop timers when in sleep mode
+EcuM_WakeupSourceType --> 2 implementations
+EcuM_WakeupSourceType --> add gpt as one of wakeup src ??
+page 13 --> SWS_Gpt_00261
+page 18 --> SRS_BSW_00417
+page 20 --> SRS_Gpt_13606
+page 20 --> SRS_Gpt_13607
+page 21 --> SRS_SPAL_12063
+page 27 --> SWS_Gpt_00386
+DETRUNTIME ERROR --> Default error tracer ~Development error 
