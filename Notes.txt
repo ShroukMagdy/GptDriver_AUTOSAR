@@ -1,3 +1,7 @@
+GPT  wakeup sequence
+---------------------
+wakeup interrupt --> gpt_checkwakeup --> ECUM_SetEvent (just set flag)
+ECUM_Checkwakeup -- checks flag
 Questions:
 ----------
 predef timers should have state running ,so be checking only on state running, we stop timers when in sleep mode
