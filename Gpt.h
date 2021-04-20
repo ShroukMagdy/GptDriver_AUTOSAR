@@ -17,6 +17,20 @@
 #include "Gpt_Cfg.h"
 
 
+/*! GPT Module Id */
+#define GPT_MODULE_ID (100U)
+/*! GPT Instance Id */
+#define GPT_INSTANCE_ID (0U)
+
+typedef enum{
+	API_ID_Gpt_SetMode					=	0x09,
+	API_ID_Gpt_DisableWakeup			=	0x0a,
+	API_ID_Gpt_EnableWakeup				=	0x0b,
+	API_ID_Gpt_CheckWakeup				=	0x0c,
+	API_ID_Gpt_GetPredefTimerValue		=	0x0d,
+
+
+}API_ID;
 typedef enum
 {
 	channel_0,
@@ -37,6 +51,13 @@ typedef enum {
 	GPT_PREDEF_TIMER_1US_32BIT 	 =	0x02 ,  // GPT Predef Timer with tick duration 1µs   and range 32bit
 	GPT_PREDEF_TIMER_100US_32BIT  =	0x03	// GPT Predef Timer with tick duration 100µs and range 32bit
 }Gpt_PredefTimerType;
+/*
+typedef enum{
+	GptPredefTimer100us32bitEnable_OFF,
+	GptPredefTimer100us32bitEnable_ON
+}GptPredefTimer100us32bitEnable_e;
+GptPredefTimer100us32bitEnable_e GptPredefTimer100us32bitEnable;
+*/
 /****************************************ROANNE********************************************/
 typedef struct
 {
@@ -48,6 +69,7 @@ typedef struct
                                           GPT_PREDEF_TIMER_1US_32BIT
                                           GPT_PREDEF_TIMER_100US_32BIT */
 }Gpt_ConfigType;
+
 typedef struct
 {
 		//Questions??
@@ -73,6 +95,21 @@ typedef enum
 	GPT_E_PARAM_PREDEF_TIMER=0x17,
 	GPT_E_PARAM_MODE=0x1F
 }Gpt_ReturnError_t;
+typedef enum
+{
+
+/*API service called when timer
+channel is still busy (running) Development
+*/
+	GPT_E_BUSY = 0x0B,
+/*
+API service called when driver
+is in wrong mode Development
+*/
+	GPT_E_MODE = 0x0C
+}Gpt_RuntimeReturnError_t;
+
+
 /******************************************************************************************/
 
 /****************************************YOUSSEF*******************************************/
@@ -419,6 +456,8 @@ Gpt_EnableNotification shall raise the error GPT_E_PARAM_CHANNEL.
 
 //tenuGPT_err Gpt_DisableNotification(Gpt_ChannelType Channel);
 
+#if GptWakeupFunctionalityApi == GptWakeupFunctionalityApi_ON
+#if GptReportWakeupSource == GptReportWakeupSource_ON
 
 /**********************************************************************************************************************
  *  LOCAL FUNCTION PROTOTYPES
@@ -434,14 +473,24 @@ Gpt_EnableNotification shall raise the error GPT_E_PARAM_CHANNEL.
  *  \param[in,out]              None
  *  \param[out]                 None
  *  \return                     None
- *  \pre                        GptWakeupFunctionalityApi should be configured to be ON
+ *  \pre                        None
  *  \context                    Task
  *  \reentrant                  Non Reentrant
  *  \synchronous                Synchronous
- *  \satisfied by               ------
+ *  \satisfied by               SWS_Gpt_00151
+ *  \satisfied by               SWS_Gpt_00255
+ *  \satisfied by               SWS_Gpt_00152
+ *  \satisfied by               SWS_Gpt_00153
+ *  \satisfied by               SWS_Gpt_00164
+ *  \satisfied by               SWS_Gpt_00165
+ *  \satisfied by               SWS_Gpt_00341
+ *  \satisfied by               SWS_Gpt_00228
+ *  \satisfied by               SWS_Gpt_00231
+ *  \satisfied by				SWS_Gpt_00201
+ *  \satisfied by				SWS_Gpt_00392
+ *  \satisfied by				SWS_Gpt_00393
  *********************************************************************************************************************/
 void Gpt_SetMode(Gpt_ModeType Mode);
-
 /**********************************************************************************************************************
  *  LOCAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
@@ -461,7 +510,12 @@ void Gpt_SetMode(Gpt_ModeType Mode);
  *  \context                    Task
  *  \reentrant                  Reentrant (but not for the same timer channel)
  *  \synchronous                Synchronous
- *  \satisfied by               ------
+ *  \satisfied by               SWS_Gpt_00229
+ *  \satisfied by               SWS_Gpt_00215
+ *  \satisfied by               SWS_Gpt_00159
+ *  \satisfied by               SWS_Gpt_00157
+ *  \satisfied by               SWS_Gpt_00155
+ *  \satisfied by               SWS_Gpt_00202
  *********************************************************************************************************************/
 void Gpt_DisableWakeup(Gpt_ChannelType Channel);
 
@@ -507,10 +561,16 @@ void Gpt_EnableWakeup(Gpt_ChannelType Channel);
  *  \context                    Task
  *  \reentrant                  Reentrant
  *  \synchronous                Synchronous
- *  \satisfied by               ------
+ *  \satisfied by               SWS_Gpt_00321
+ *  \satisfied by               SWS_Gpt_00322
+ *  \satisfied by               SWS_Gpt_00323
+ *  \satisfied by               SWS_Gpt_00324
+ *  \satisfied by               SWS_Gpt_00325
  *********************************************************************************************************************/
 void Gpt_CheckWakeup(EcuM_WakeupSourceType WakeupSource);
 
+#endif
+#endif
 /**********************************************************************************************************************
  *  LOCAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
@@ -530,7 +590,15 @@ void Gpt_CheckWakeup(EcuM_WakeupSourceType WakeupSource);
  *  \context                    Task
  *  \reentrant                  Reentrant
  *  \synchronous                Synchronous
- *  \satisfied by               ------
+ *  \satisfied by               SWS_Gpt_00395
+ *  \satisfied by               SWS_Gpt_00396
+ *  \satisfied by               SWS_Gpt_00397
+ *  \satisfied by               SWS_Gpt_00398
+ *  \satisfied by               SWS_Gpt_00399
+ *  \satisfied by               SWS_Gpt_00400
+ *  \satisfied by               SWS_Gpt_00401
+ *  \satisfied by               SWS_Gpt_00402
+ *  \satisfied by               SWS_Gpt_00403
  *********************************************************************************************************************/
 Std_ReturnType Gpt_GetPredefTimerValue(Gpt_PredefTimerType PredefTimer, uint32* TimeValuePtr);
 

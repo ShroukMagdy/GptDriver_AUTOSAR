@@ -18,7 +18,9 @@
 /**********************************************************************************************************************
  *  LOCAL CONSTANT MACROS
  *********************************************************************************************************************/
- /*
+#define GPT_CHANNEL0				0x20
+
+/*
  EcuM_WakeupSourceType defines a bitfield with 5 pre-defined positions (see 
 Range). The bitfield provides one bit for each wakeup source.
 In WAKEUP, all bits cleared indicates that no wakeup source is known.
@@ -50,7 +52,11 @@ ECUM_WKSOURCE_INTERNAL_RESET=0x04,
 //ECUM_WKSOURCE_INTERNAL_WDG -- Reset by internal watchdog (bit 3)
 ECUM_WKSOURCE_INTERNAL_WDG=0x08,
 //ECUM_WKSOURCE_EXTERNAL_WDG -- Reset by external watchdog (bit 4), if detection supported by hardware
-ECUM_WKSOURCE_EXTERNAL_WDG=0x10	
+ECUM_WKSOURCE_EXTERNAL_WDG=0x10,
+
+//added for GPT
+ECUM_WKSOURCE_GPT_CHANNEL0=GPT_CHANNEL0
+
 }EcuM_WakeupSourceType;
 /***********************************************/
 /*****************2nd implemenetaion************/
@@ -65,8 +71,9 @@ EcuM_WakeupSourceType ECUM_WKSOURCE_EXTERNAL_WDG=0x10;
 /***********************************************/
  
 /**********************************************************************************************************************
- *  GLOBAL DATA
+ *  LOCAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
+void EcuM_SetWakeupEvent(EcuM_WakeupSourceType sources);
 
 
 
