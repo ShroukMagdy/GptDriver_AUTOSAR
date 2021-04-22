@@ -816,10 +816,10 @@ Std_ReturnType Gpt_GetPredefTimerValue(Gpt_PredefTimerType PredefTimer, uint32* 
 
 
 #endif
-		/*
+	/*
 	[SWS_Gpt_00401] ⌈ If the driver is in "sleep mode", the function
 	Gpt_GetPredefTimerValue shall raise the runtime error GPT_E_MODE.⌋ ( )
-		 */
+	 */
 
 	if(Internal_Mode == GPT_MODE_SLEEP){
 		Det_ReportRuntimeError(GPT_MODULE_ID,GPT_INSTANCE_ID,API_ID_Gpt_GetPredefTimerValue,GPT_E_MODE);
@@ -860,5 +860,66 @@ Std_ReturnType Gpt_GetPredefTimerValue(Gpt_PredefTimerType PredefTimer, uint32* 
 		LocalReturn=E_OK;
 	}
 	return LocalReturn;
+}
+/**********************************************************************************************************************
+ *  LOCAL FUNCTION PROTOTYPES
+ *********************************************************************************************************************/
+
+/**********************************************************************************************************************
+ *  Std_ReturnType Gpt_GetPredefTimerValue(EcuM_WakeupSourceType WakeupSource)
+ *********************************************************************************************************************/
+/*! \details       				The notification prototype Gpt_Notification_<channel> is for the notification
+								callback function and shall be implemented by the user.
+								The GPT module’s environment shall declare a separate notification for each channel
+								to avoid parameters in notification services and to improve run time efficiency.
+ *  \param[in]                  None
+ *  \param[in,out]              None
+ *  \param[out]                 None
+ *  \return       				None
+ *  \pre                        None
+ *  \context                    Task
+ *  \reentrant                  Reentrant
+ *  \synchronous                Synchronous
+ *  \satisfied by               SWS_Gpt_00086
+ *  \satisfied by               SWS_Gpt_00209
+ *  \satisfied by               SWS_Gpt_00093
+ *  \satisfied by               SWS_Gpt_00233
+ *  \satisfied by               SWS_Gpt_00206
+ *  \violated by                SWS_Gpt_00362
+ *********************************************************************************************************************/
+void Gpt_Notification_channel_0(void){
+	/*
+	[SWS_Gpt_00093] ⌈ When disabled, the GPT Driver will send no notification. ⌋ ( )
+	*/
+	/*
+	 if(Channels_cfg[channel0].Gpt_NotificationEnable==Enabled){
+	 */
+	/*
+	[SWS_Gpt_00086] ⌈ The callback notifications Gpt_Notification_<channel>
+	shall be configurable as pointers to user defined functions within the configuration
+	structure. ⌋ ( )
+	*/
+	/*
+	[SWS_Gpt_00209] ⌈ Each channel shall provide its own notification if configured. ⌋
+	(SRS_BSW_00375, SRS_SPAL_12069)
+	*/
+	/*
+	[SWS_Gpt_00233] ⌈ The GPT Driver shall invoke a notification whenever the
+	defined target time of the channel is reached. ⌋ (SRS_SPAL_12067,
+	SRS_Gpt_12120)
+	*/
+	/*
+	[SWS_Gpt_00206] ⌈ The ISR´s, providing the timer events, shall be responsible for
+	resetting the interrupt flags (if needed by hardware) and calling the according
+	notification function. ⌋ (SRS_SPAL_12129)
+	*/
+	/*
+	 Channels_cfg[channel0].Gpt_Notification();
+	 */
+	//}
+	/*
+	[SWS_Gpt_00362] ⌈ For all available channels, callback functions have to be
+	declared by the configuration tool. ⌋ ( )
+	*/
 }
 
