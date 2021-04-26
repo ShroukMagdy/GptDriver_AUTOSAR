@@ -46,8 +46,10 @@ static Gpt_ModeType Internal_Mode;
  *	Outputs      :N/A
  * Return value: :N/A
  * */
-void Gpt_GetVersionInfo(Std_VersionInfoType* VersionInfoPtr){
+void Gpt_GetVersionInfo(Std_VersionInfoType* VersionInfoPtr)
+{
 
+/*only  version , check if pointer is null */
 }
 /*
  * Function Name: Gpt_Init
@@ -58,7 +60,10 @@ void Gpt_GetVersionInfo(Std_VersionInfoType* VersionInfoPtr){
  *	Outputs      :N/A
  * Return value: :N/A
  * */
-void Gpt_Init(const Gpt_ConfigType* ConfigPtr){
+static Gpt_ConfigType* LockCfgPtr;
+void Gpt_Init(const Gpt_ConfigType* ConfigPtr)
+{
+	LockCfgPtr =ConfigPtr;
 
 }
 /*
@@ -70,9 +75,11 @@ void Gpt_Init(const Gpt_ConfigType* ConfigPtr){
  *	Outputs      :N/A
  * Return value: :N/A
  * */
+#if GptDeInitApi ==ON
 void Gpt_DeInit(void){
 
 }
+#endif
 
 /*[SWS_00010] ==> Approved*/
 /*if the mode is one shoot we should return the value in ticks */
@@ -866,7 +873,7 @@ Std_ReturnType Gpt_GetPredefTimerValue(Gpt_PredefTimerType PredefTimer, uint32* 
  *********************************************************************************************************************/
 
 /**********************************************************************************************************************
- *  Std_ReturnType Gpt_GetPredefTimerValue(EcuM_WakeupSourceType WakeupSource)
+ *  void Gpt_Notification_channel_0(void)
  *********************************************************************************************************************/
 /*! \details       				The notification prototype Gpt_Notification_<channel> is for the notification
 								callback function and shall be implemented by the user.

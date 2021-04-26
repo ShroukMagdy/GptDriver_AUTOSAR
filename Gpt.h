@@ -44,6 +44,7 @@ typedef enum {
 	GPT_MODE_SLEEP  =	0x01	 // Sleep mode of the GPT driver (wakeup capable)
 }Gpt_ModeType;
 
+
 // Enum for Type for GPT Predef Timers
 typedef enum {
 	GPT_PREDEF_TIMER_1US_16BIT 	 =	0x00 ,	// GPT Predef Timer with tick duration 1µs   and range 16bit
@@ -58,7 +59,15 @@ typedef enum{
 }GptPredefTimer100us32bitEnable_e;
 GptPredefTimer100us32bitEnable_e GptPredefTimer100us32bitEnable;
 */
+
 /****************************************ROANNE********************************************/
+/*
+ * notes:
+ * add channel id
+ * array of struct of channels
+ * remove type from elements in struct
+ * remove predef
+ */
 typedef struct
 {
 	uint8 ChannelType;                      //u8 is defined as uint8 in Platform_Types.h

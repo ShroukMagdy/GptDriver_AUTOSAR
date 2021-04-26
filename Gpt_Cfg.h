@@ -64,10 +64,9 @@ typedef enum{
 	GPT_PREDEF_TIMER_1US_DISABLED 				//disabled
 }GptPredefTimer1usEnablingGrade_e;
 //Enables/Disables wakeup source reporting
-typedef enum{
-	GptReportWakeupSource_ON,
-	GptReportWakeupSource_OFF
-}GptReportWakeupSource_e;
+#define GptReportWakeupSource_OFF	0x00
+#define GptReportWakeupSource_ON	0x01
+
 
 /*
  * parent container :GptDriverConfiguration
@@ -80,18 +79,18 @@ typedef enum{
 	*/
 
 #define GptDevErrorDetect 		GptDevErrorDetect_ON
-#define GptReportWakeupSource 	GptReportWakeupSource_ON
+#define GptReportWakeupSource 	GptReportWakeupSource_OFF
 /*
  * Adds / removes the services Gpt_SetMode(), Gpt_EnableWakeup()
 Gpt_DisableWakeup() and Gpt_CheckWakeup() from the code.
  *
  */
-typedef enum{
-	GptWakeupFunctionalityApi_ON,
-	GptWakeupFunctionalityApi_OFF
-}GptWakeupFunctionalityApi_e;
 
-#define GptWakeupFunctionalityApi GptWakeupFunctionalityApi_ON
+#define GptWakeupFunctionalityApi_OFF	0x00
+#define GptWakeupFunctionalityApi_ON	0x01
+
+
+#define GptWakeupFunctionalityApi GptWakeupFunctionalityApi_OFF
 
 /***return to ECU as it should be according to bitfield, this value is not mandatory*/
 #define GPT_CHANNEL0				0x20
